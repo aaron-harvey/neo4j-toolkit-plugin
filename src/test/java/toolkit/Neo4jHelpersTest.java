@@ -45,7 +45,7 @@ public class Neo4jHelpersTest {
             assertThat(result).isEqualTo("{oldKey: NULL}");
 
             /* no change */
-            result = session.run("RETURN utils.diff({id:'test', key:42}, {id:'test', key:42}) AS result").single().get("result").toString();
+            result = session.run("RETURN toolkit.diff({id:'test', key:42}, {id:'test', key:42}) AS result").single().get("result").toString();
             assertThat(result).isEqualTo("{}");
         }
     }

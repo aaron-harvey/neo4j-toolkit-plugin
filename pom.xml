@@ -5,26 +5,26 @@
 
     <groupId>org.onsemi</groupId>
     <artifactId>toolkit</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>5.16.0-SNAPSHOT</version>
 
     <packaging>jar</packaging>
     <name>Neo4j Helper Functions</name>
     <description>A grouping of utility functions for Neo4J</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
+        <neo4j.version>5.12.0</neo4j.version>
+        <neo4j-java-driver.version>${neo4j.version}</neo4j-java-driver.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-
+        <maven.compiler.release>${java.version}</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <neo4j.version>4.4.3</neo4j.version>
-        <neo4j-java-driver.version>4.4.3</neo4j-java-driver.version>
-        <junit-jupiter.version>5.8.2</junit-jupiter.version>
-        <maven-shade-plugin.version>3.2.4</maven-shade-plugin.version>
-        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
-        <assertj.version>3.22.0</assertj.version>
-        <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
+        <junit-jupiter.version>5.10.0</junit-jupiter.version>
+        <maven-shade-plugin.version>3.5.1</maven-shade-plugin.version>
+        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <assertj.version>3.24.2</assertj.version>
+        <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     </properties>
 
     <dependencies>
@@ -38,10 +38,18 @@
 
         <!-- Test Dependencies -->
         <dependency>
+            <!-- This is used for a utility that lets us start Neo4j with
+                 a specific Procedure, which is nice for writing tests. -->
             <groupId>org.neo4j.test</groupId>
             <artifactId>neo4j-harness</artifactId>
             <version>${neo4j.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-nop</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
